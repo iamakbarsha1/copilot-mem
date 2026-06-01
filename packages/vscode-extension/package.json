@@ -1,0 +1,78 @@
+{
+  "name": "copilot-mem-vscode",
+  "displayName": "Copilot Mem",
+  "description": "Bridge GitHub Copilot to claude-mem's observation database",
+  "version": "0.1.0",
+  "publisher": "iamakbarsha",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.100.0"
+  },
+  "categories": [
+    "AI",
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "copilotMem.saveObservation",
+        "title": "Save Observation",
+        "category": "Copilot Mem"
+      },
+      {
+        "command": "copilotMem.searchObservations",
+        "title": "Search Observations",
+        "category": "Copilot Mem"
+      }
+    ],
+    "configuration": {
+      "title": "Copilot Mem",
+      "properties": {
+        "copilotMem.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable copilot-mem observation capture"
+        },
+        "copilotMem.observeFileSaves": {
+          "type": "boolean",
+          "default": true,
+          "description": "Capture observations on file save"
+        },
+        "copilotMem.observeGitCommits": {
+          "type": "boolean",
+          "default": true,
+          "description": "Capture observations on git commit"
+        },
+        "copilotMem.observeEditorFocus": {
+          "type": "boolean",
+          "default": false,
+          "description": "Capture observations on editor focus change"
+        },
+        "copilotMem.batchIntervalMs": {
+          "type": "number",
+          "default": 30000,
+          "description": "Batch interval for writing observations (ms)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "dev": "node build.mjs --watch",
+    "package": "vsce package",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.100.0",
+    "@types/better-sqlite3": "^7.6.13",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.8.0"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.9.0"
+  }
+}
