@@ -8,6 +8,6 @@ export default defineConfig({
   banner: {
     js: "#!/usr/bin/env node",
   },
-  external: ["better-sqlite3"],
+  external: ["better-sqlite3", "web-tree-sitter", "@repomix/tree-sitter-wasms"],
   noExternal: ["@copilot-mem/shared"],
 });

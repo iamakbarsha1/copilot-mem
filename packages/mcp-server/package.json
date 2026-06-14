@@ -24,6 +24,8 @@
     "@copilot-mem/shared": "*",
     "@modelcontextprotocol/sdk": "^1.12.1",
     "better-sqlite3": "^11.9.0",
+    "web-tree-sitter": "^0.26.9",
+    "@repomix/tree-sitter-wasms": "^0.1.17",
     "zod": "^3.25.0"
   },
   "devDependencies": {

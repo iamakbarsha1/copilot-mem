@@ -22,5 +22,6 @@
   "packageManager": "npm@11.12.1",
   "engines": {
     "node": ">=20"
-  }
+  },
+  "overrides": {}
 }

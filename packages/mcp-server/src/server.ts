@@ -9,6 +9,9 @@ import { registerGetProjectContext } from "./tools/get-project-context.js";
 import { registerListProjects } from "./tools/list-projects.js";
 import { registerGetSessionSummaries } from "./tools/get-session-summaries.js";
 import { registerObservationContext } from "./tools/observation-context.js";
+import { registerSmartSearch } from "./tools/smart-search.js";
+import { registerSmartOutline } from "./tools/smart-outline.js";
+import { registerSmartUnfold } from "./tools/smart-unfold.js";
 
 export function createServer(): McpServer {
   const server = new McpServer({
@@ -16,7 +19,7 @@ export function createServer(): McpServer {
     version: "0.1.0",
   });
 
-  // Register all 9 tools
+  // Register all 12 tools
   registerImportant(server);
   registerSearchObservations(server);
   registerGetObservationDetails(server);
@@ -26,6 +29,9 @@ export function createServer(): McpServer {
   registerListProjects(server);
   registerGetSessionSummaries(server);
   registerObservationContext(server);
+  registerSmartSearch(server);
+  registerSmartOutline(server);
+  registerSmartUnfold(server);
 
   // Resources
   server.resource(
