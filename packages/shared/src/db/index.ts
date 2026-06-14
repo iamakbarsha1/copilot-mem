@@ -16,3 +16,7 @@ export {
   getOrCreateSession,
   completeSession,
 } from "./sessions.js";
+export {
+  getSessionSummaries,
+  searchSessionSummaries,
+} from "./session-summaries.js";

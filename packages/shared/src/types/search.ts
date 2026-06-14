@@ -31,6 +31,10 @@ export interface SearchOptions {
   project?: string;
   type?: string;
   limit?: number;
+  offset?: number;
+  dateStart?: number;
+  dateEnd?: number;
+  orderBy?: "rank" | "recent" | "oldest";
 }
 
 export interface TimelineOptions {

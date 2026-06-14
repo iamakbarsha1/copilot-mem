@@ -1,11 +1,14 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { getDb, countByProject, getProjectContext } from "@copilot-mem/shared";
+import { registerImportant } from "./tools/important.js";
 import { registerSearchObservations } from "./tools/search-observations.js";
 import { registerGetObservationDetails } from "./tools/get-observation-details.js";
 import { registerGetTimeline } from "./tools/get-timeline.js";
 import { registerSaveObservation } from "./tools/save-observation.js";
 import { registerGetProjectContext } from "./tools/get-project-context.js";
 import { registerListProjects } from "./tools/list-projects.js";
+import { registerGetSessionSummaries } from "./tools/get-session-summaries.js";
+import { registerObservationContext } from "./tools/observation-context.js";
 
 export function createServer(): McpServer {
   const server = new McpServer({
@@ -13,13 +16,16 @@ export function createServer(): McpServer {
     version: "0.1.0",
   });
 
-  // Register all 6 tools
+  // Register all 9 tools
+  registerImportant(server);
   registerSearchObservations(server);
   registerGetObservationDetails(server);
   registerGetTimeline(server);
   registerSaveObservation(server);
   registerGetProjectContext(server);
   registerListProjects(server);
+  registerGetSessionSummaries(server);
+  registerObservationContext(server);
 
   // Resources
   server.resource(

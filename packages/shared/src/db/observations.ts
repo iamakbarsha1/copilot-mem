@@ -16,7 +16,7 @@ export function searchObservations(
   db: Database.Database,
   options: SearchOptions,
 ): SearchResult[] {
-  const { query, project, type, limit = 20 } = options;
+  const { query, project, type, limit = 20, offset = 0, dateStart, dateEnd, orderBy = "rank" } = options;
 
   let sql = `
     SELECT o.id, o.title, o.type, o.project, o.created_at_epoch, rank
@@ -34,9 +34,28 @@ export function searchObservations(
     sql += " AND o.type = ?";
     params.push(type);
   }
+  if (dateStart) {
+    sql += " AND o.created_at_epoch >= ?";
+    params.push(dateStart);
+  }
+  if (dateEnd) {
+    sql += " AND o.created_at_epoch <= ?";
+    params.push(dateEnd);
+  }
 
-  sql += " ORDER BY rank LIMIT ?";
-  params.push(limit);
+  switch (orderBy) {
+    case "recent":
+      sql += " ORDER BY o.created_at_epoch DESC";
+      break;
+    case "oldest":
+      sql += " ORDER BY o.created_at_epoch ASC";
+      break;
+    default:
+      sql += " ORDER BY rank";
+  }
+
+  sql += " LIMIT ? OFFSET ?";
+  params.push(limit, offset);
 
   return db.prepare(sql).all(...params) as SearchResult[];
 }

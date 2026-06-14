@@ -23,6 +23,23 @@ const schema = {
     .max(100)
     .default(20)
     .describe("Max results to return"),
+  offset: z
+    .number()
+    .min(0)
+    .default(0)
+    .describe("Offset for pagination"),
+  dateStart: z
+    .number()
+    .optional()
+    .describe("Filter: only observations after this Unix epoch (seconds)"),
+  dateEnd: z
+    .number()
+    .optional()
+    .describe("Filter: only observations before this Unix epoch (seconds)"),
+  orderBy: z
+    .enum(["rank", "recent", "oldest"])
+    .default("rank")
+    .describe("Sort order: rank (relevance), recent, or oldest"),
 };
 
 export function registerSearchObservations(server: McpServer) {
@@ -30,9 +47,9 @@ export function registerSearchObservations(server: McpServer) {
     "search_observations",
     "Search observations using FTS5 full-text search. Returns index with IDs and titles (not full content). Use get_observation_details to fetch full content by ID.",
     schema,
-    async ({ query, project, type, limit }) => {
+    async ({ query, project, type, limit, offset, dateStart, dateEnd, orderBy }) => {
       const db = getDb({ readonly: true });
-      const results = searchObservations(db, { query, project, type, limit });
+      const results = searchObservations(db, { query, project, type, limit, offset, dateStart, dateEnd, orderBy });
 
       return {
         content: [
