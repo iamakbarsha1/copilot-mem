@@ -23,6 +23,7 @@
   "dependencies": {
     "@copilot-mem/shared": "*",
     "@modelcontextprotocol/sdk": "^1.12.1",
+    "@anthropic-ai/sdk": "^0.52.0",
     "better-sqlite3": "^11.9.0",
     "web-tree-sitter": "^0.26.9",
     "@repomix/tree-sitter-wasms": "^0.1.17",
