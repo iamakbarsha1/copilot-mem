@@ -8,6 +8,6 @@ export default defineConfig({
   banner: {
     js: "#!/usr/bin/env node",
   },
-  external: ["better-sqlite3", "web-tree-sitter", "@repomix/tree-sitter-wasms", "@anthropic-ai/sdk"],
+  external: ["better-sqlite3", "web-tree-sitter", "@repomix/tree-sitter-wasms", "@anthropic-ai/sdk", "openai"],
   noExternal: ["@copilot-mem/shared"],
 });
